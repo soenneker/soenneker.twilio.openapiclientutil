@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -25,14 +26,21 @@ public sealed class TwilioOpenApiClientUtil : ITwilioOpenApiClientUtil
         {
             HttpClient httpClient = await httpClientUtil.Get(token).NoSync();
 
-            var apiKey = configuration.GetValueStrict<string>("Twilio:ApiKey");
-            string authHeaderValueTemplate = configuration["Twilio:AuthHeaderValueTemplate"] ?? "{token}";
-            string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
+            (string authHeaderName, string authHeaderValue) = GetAuthenticationHeader(configuration);
 
-            var requestAdapter = new HttpClientRequestAdapter(new GenericAuthenticationProvider(headerValue: authHeaderValue), httpClient: httpClient);
+            var requestAdapter = new HttpClientRequestAdapter(new GenericAuthenticationProvider(headerName: authHeaderName, headerValue: authHeaderValue), httpClient: httpClient);
 
             return new TwilioOpenApiClient(requestAdapter);
         });
+    }
+
+    private static (string headerName, string headerValue) GetAuthenticationHeader(IConfiguration configuration)
+    {
+        var apiKey = configuration.GetValueStrict<string>("Twilio:ApiKey");
+        var apiSecret = configuration.GetValueStrict<string>("Twilio:ApiSecret");
+        string credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{apiKey}:{apiSecret}"));
+
+        return ("Authorization", $"Basic {credentials}");
     }
 
     public ValueTask<TwilioOpenApiClient> Get(CancellationToken cancellationToken = default)
