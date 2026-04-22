@@ -1,20 +1,19 @@
 using Soenneker.Twilio.OpenApiClientUtil.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Twilio.OpenApiClientUtil.Tests;
 
-[Collection("Collection")]
-public sealed class TwilioOpenApiClientUtilTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class TwilioOpenApiClientUtilTests : HostedUnitTest
 {
     private readonly ITwilioOpenApiClientUtil _openapiclientutil;
 
-    public TwilioOpenApiClientUtilTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public TwilioOpenApiClientUtilTests(Host host) : base(host)
     {
         _openapiclientutil = Resolve<ITwilioOpenApiClientUtil>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
