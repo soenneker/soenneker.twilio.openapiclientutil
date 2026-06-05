@@ -48,11 +48,18 @@ public sealed class TwilioOpenApiClientUtil : ITwilioOpenApiClientUtil
         return _client.Get(cancellationToken);
     }
 
+    /// <summary>
+    /// Releases resources used by the current instance.
+    /// </summary>
     public void Dispose()
     {
         _client.Dispose();
     }
 
+    /// <summary>
+    /// Asynchronously releases resources used by the current instance.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public ValueTask DisposeAsync()
     {
         return _client.DisposeAsync();
