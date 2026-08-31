@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 namespace Soenneker.Twilio.OpenApiClientUtil.Abstract;
 
 /// <summary>
-/// Exposes a cached OpenAPI client instance.
+/// Provides an authenticated, cached Twilio OpenAPI client.
 /// </summary>
-public interface ITwilioOpenApiClientUtil: IDisposable, IAsyncDisposable
+public interface ITwilioOpenApiClientUtil : IDisposable, IAsyncDisposable
 {
     /// <summary>
-    /// Gets the value.
+    /// Gets the authenticated client, creating it on first use.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task containing the result of the operation.</returns>
+    /// <param name="cancellationToken">The token used to cancel client creation.</param>
+    /// <returns>The cached client.</returns>
     ValueTask<TwilioOpenApiClient> Get(CancellationToken cancellationToken = default);
 }

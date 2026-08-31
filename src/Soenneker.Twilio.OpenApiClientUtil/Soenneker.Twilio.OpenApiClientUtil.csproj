@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Description>A thread-safe utility for obtaining Twilio's OpenApiClient singleton.</Description>
+        <Description>Provides an authenticated, cached Twilio OpenAPI client</Description>
         <Version Condition="'$(BUILD_VERSION)' == ''">4.0.0</Version>
         <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
         <AssemblyName>Soenneker.Twilio.OpenApiClientUtil</AssemblyName>

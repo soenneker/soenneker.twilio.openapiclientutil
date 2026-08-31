@@ -6,7 +6,7 @@ using Soenneker.Twilio.OpenApiClientUtil.Abstract;
 namespace Soenneker.Twilio.OpenApiClientUtil.Registrars;
 
 /// <summary>
-/// Registers the OpenAPI client utility for dependency injection.
+/// Registers an authenticated Twilio OpenAPI client provider.
 /// </summary>
 public static class TwilioOpenApiClientUtilRegistrar
 {
