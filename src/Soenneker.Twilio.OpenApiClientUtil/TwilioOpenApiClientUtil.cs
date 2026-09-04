@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Kiota.Http.HttpClientLibrary;
 using Soenneker.Extensions.Configuration;
-using Soenneker.Extensions.ValueTask;
 using Soenneker.Twilio.HttpClients.Abstract;
 using Soenneker.Twilio.OpenApiClientUtil.Abstract;
 using Soenneker.Twilio.OpenApiClient;
@@ -23,7 +22,7 @@ public sealed class TwilioOpenApiClientUtil : ITwilioOpenApiClientUtil
     {
         _client = new AsyncSingleton<TwilioOpenApiClient>(async token =>
         {
-            HttpClient httpClient = await httpClientUtil.Get(token).NoSync();
+            HttpClient httpClient = await httpClientUtil.Get(token).ConfigureAwait(false);
 
             (string authHeaderName, string authHeaderValue) = GetAuthenticationHeader(configuration);
 
