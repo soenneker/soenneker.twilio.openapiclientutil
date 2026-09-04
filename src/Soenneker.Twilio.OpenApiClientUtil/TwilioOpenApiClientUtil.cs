@@ -14,6 +14,7 @@ using Soenneker.Utils.AsyncSingleton;
 
 namespace Soenneker.Twilio.OpenApiClientUtil;
 
+/// <inheritdoc cref="ITwilioOpenApiClientUtil" />
 public sealed class TwilioOpenApiClientUtil : ITwilioOpenApiClientUtil
 {
     private readonly AsyncSingleton<TwilioOpenApiClient> _client;
