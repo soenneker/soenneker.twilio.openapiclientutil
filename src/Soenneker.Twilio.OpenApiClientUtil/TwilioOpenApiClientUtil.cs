@@ -35,8 +35,8 @@ public sealed class TwilioOpenApiClientUtil : ITwilioOpenApiClientUtil
 
     private static (string headerName, string headerValue) GetAuthenticationHeader(IConfiguration configuration)
     {
-        var apiKey = configuration.GetValueStrict<string>("Twilio:ApiKey");
-        var apiSecret = configuration.GetValueStrict<string>("Twilio:ApiSecret");
+        var apiKey = configuration.GetStringStrict("Twilio:ApiKey");
+        var apiSecret = configuration.GetStringStrict("Twilio:ApiSecret");
         string credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{apiKey}:{apiSecret}"));
 
         return ("Authorization", $"Basic {credentials}");
