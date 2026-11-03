@@ -47,6 +47,6 @@
         <PackageReference Include="Soenneker.Extensions.Configuration" Version="11.0.914" />
         <PackageReference Include="Soenneker.Kiota.GenericAuthenticationProvider" Version="11.0.60" />
         <PackageReference Include="Soenneker.Twilio.HttpClients" Version="11.0.157" />
-        <PackageReference Include="Soenneker.Twilio.OpenApiClient" Version="11.0.75" />
+        <PackageReference Include="Soenneker.Twilio.OpenApiClient" Version="11.0.76" />
     </ItemGroup>
 </Project>
